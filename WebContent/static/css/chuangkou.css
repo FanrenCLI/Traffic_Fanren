@@ -1,0 +1,28 @@
+.dialog { 
+		width: 700px; 
+		height: 400px; 
+		position:absolute; 
+		left:50%;top:50%; 
+		margin-top:-150px; 
+		margin-left:-200px; 
+		z-index: 30;
+		box-shadow: 2px 2px 4px #ccc; 
+		background-color: #f1f1f1; 
+		border: solid 1px #aaa; 
+		border-radius: 4px; 
+		overflow: hidden; 
+		display: none; }
+	.dialog .title { 
+		font-size: 16px; 
+		font-weight: bold; 
+		color: #fff; 
+		padding: 6px; 
+		background-color: #404040; }
+	.dialog .close {
+		 width: 20px; 
+		 height: 20px; 
+		 margin: 3px; 
+		 float: right; 
+		 cursor: pointer; 
+		 color: #fff; }
+ 

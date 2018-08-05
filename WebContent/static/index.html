@@ -1,0 +1,149 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="" />
+<title>Insert title here</title>
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="css/chuangkou.css" type='text/css'/>
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<!-- Graph CSS -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+	<!-- jQuery -->
+	<!-- lined-icons -->
+<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+
+	<!-- js -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<!-- js-->
+<link rel="stylesheet" href="http://localhost:8080/JSAPI/4.5/dijit/themes/claro/claro.css"/>  
+<link rel="stylesheet" href="http://localhost:8080/JSAPI/4.5/esri/css/main.css" />  
+ <script src="http://localhost:8080/JSAPI/4.5/dojo/dojo.js"></script>  
+
+    <style>
+      html,
+      body,
+      #map{
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        position: absolute;}
+	
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+
+   <!--/content-inner-->
+		<div class="left-content">
+		   <div class="inner-content">
+			<!-- header-starts -->
+				<div class="header-section">
+					<div class="top_menu" style="height: 60px ;padding: 0;margin: 0; ">
+						<h1 style="margin:0;padding-top: 10px ">&nbsp;&nbsp;&nbsp;&nbsp;基于人工智能出行行为分析管理系统
+						</h1>
+						
+					</div>
+				</div>
+					<!--//menu-right-->
+				<div class="clearfix"></div>
+			</div>
+
+		<div id="map">
+			<div id="dlgTest" class="dialog"><span class="close">&times;</span>
+			    <div class="title">轨迹显示</div>
+			    <div class="content"><br>
+			    &nbsp;&nbsp;<label >&nbsp;起始日期：&nbsp;</label>&nbsp;<input id="start" type="date" value="2014-01-13"/>
+			    <label >&nbsp;截止日期：&nbsp;</label>&nbsp;<input id="end" type="date" value="2014-01-13"/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="trackvisual" type="button" value="显示" >
+			    </div>
+			</div>
+		</div>
+		</div>
+		<div class="sidebar-menu">
+					<header class="logo">
+					 	<span id="box1" > 
+					 		function
+					 	</span>
+					</header>
+						<div class="menu">
+									<ul id="menu" >
+										<li><a href="#"><span >区域添加</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+											<ul id="menu-academico-sub" >
+											<li id="menu-academico-avaliacoes" ><a href="#"><span id="dian">点状区域</span></a></li>
+											<li id="menu-academico-boletim" ><a href="#"><span id="mian">面状区域</span></a></li>
+										  </ul>
+										</li>
+										 <li id="menu-academico" ><a href="#"> <span>路线导航</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+										   <ul id="menu-academico-sub" >
+											<li id="menu-academico-avaliacoes" ><a href="#"> Tabs &amp; Panels</a></li>
+											<li id="menu-academico-boletim" ><a href="#">Widgets</a></li>
+											
+										  </ul>
+										</li>
+										 <li id="menu-academico" ><a href="#"> <span>位置分析</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+											 <ul id="menu-academico-sub" >
+												<li id="menu-academico-avaliacoes" onclick="openDialog();" ><a href="#">轨迹显示</a></li>
+												<li id="menu-academico-boletim" ><a href="#">Validation Forms</a></li>
+												<li id="menu-academico-boletim" ><a href="#">Tables</a></li>
+												<li id="menu-academico-boletim" ><a href="#">Buttons</a></li>
+											  </ul>
+										 </li>
+									<li><a href="#"> <span>系统设置</span></a></li>
+									<li id="menu-academico" ><a href="#"> <span>用户信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+										  <ul id="menu-academico-sub" >
+										    <li id="menu-academico-avaliacoes" ><a href="#">Login</a></li>
+										    <li id="menu-academico-boletim" ><a href="#">Register</a></li>
+											<li id="menu-academico-boletim" ><a href="#">404</a></li>
+											<li id="menu-academico-boletim" ><a href="#">Login2</a></li>
+											<li id="menu-academico-boletim" ><a href="#">Profile</a></li>
+										  </ul>
+									 </li>
+									 <li><a href="#"> <span>数据报表</span><span class="fa fa-angle-right" style="float: right"></span></a>
+									   <ul>
+										<li><a href="#"> Inbox</a></li>
+										<li><a href="#">Compose Mail</a></li>
+											<li><a href="#">Editors Page</a></li>
+									
+									  </ul>
+									</li>
+							        <li id="menu-academico" ><a href="#"> <span>轨迹追踪</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+										 <ul id="menu-academico-sub" >
+											<li id="menu-academico-avaliacoes" ><a href="#">Grids</a></li>
+											<li id="menu-academico-boletim" ><a href="#">Media Objects</a></li>
+
+										  </ul>
+									 </li>
+									<li><a href="#"><span>道路等级显示</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+									  <ul>
+										<li><a href="#">Maps</a></li>
+										<li><a href="#"> Graph Visualization</a></li>
+									</ul>
+									</li>
+									<li id="menu-comunicacao" ><a href="#"> <span>关于</span><span class="fa fa-angle-right" style="float: right"></span></a>
+									    <ul id="menu-comunicacao-sub" >
+										<li id="menu-mensagens" style="width:120px" ><a href="#">Projects </a>
+										</li>
+										<li id="menu-arquivos" ><a href="#">500</a></li>
+									  </ul>
+									</li>
+								  </ul>
+						</div>
+		</div>		
+	</div>
+						
+<!--js -->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+  	<script src="js/mercator&lonlat.js"></script>
+<!-- Bootstrap Core JavaScript -->
+  	<script src="js/bootstrap.min.js"></script>
+<!--图层-->
+  	<script src="js/loadmap.js"> </script>
+  	 <script src="js/chuangkou.js"></script>
+</body>
+</html>
