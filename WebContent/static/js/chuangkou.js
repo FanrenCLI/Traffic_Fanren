@@ -69,8 +69,8 @@ function openDialog(){
     var dlg=new Dialog('dlgTest');
     //初始化位置
     var init=document.getElementById("dlgTest");
-    init.style.left=200 + 568+ "px";
-    init.style.top=150+230+"px";
+    init.style.left= -50 + 568+ "px";
+    init.style.top= 50 + 230+"px";
     
     dlg.show();
 }
@@ -93,9 +93,9 @@ function e(event){ 							// 定义事件对象标准化函数
    return event; 							// 返回标准化的事件对象
 }
 // 定义鼠标事件处理函数
-o = document.getElementById("dlgTest");
+z = document.getElementById("title");
 
-o.onmousedown = function(event){ 	// 按下鼠标时，初始化处理
+z.onmousedown = function(event){ 	// 按下鼠标时，初始化处理
    event = e(event); 						// 获取标准事件对象
    o = document.getElementById("dlgTest");				
    ox = parseInt(o.offsetLeft); 			// 拖放元素的x轴坐标

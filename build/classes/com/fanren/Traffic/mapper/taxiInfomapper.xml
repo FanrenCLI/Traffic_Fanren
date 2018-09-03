@@ -7,7 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 		  `id`,
 		  `lon`,
-		  `lat`
+		  `lat`,
+		  `time`,
+		  `speed`,
+		  `status`
 		FROM `${start_data}`
 	</select>
 </mapper>

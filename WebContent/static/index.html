@@ -14,13 +14,23 @@
 	<!-- jQuery -->
 	<!-- lined-icons -->
 <link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
-
 	<!-- js -->
 <script src="js/jquery-1.10.2.min.js"></script>
-<!-- js-->
-<link rel="stylesheet" href="http://localhost:8080/JSAPI/4.5/dijit/themes/claro/claro.css"/>  
-<link rel="stylesheet" href="http://localhost:8080/JSAPI/4.5/esri/css/main.css" />  
- <script src="http://localhost:8080/JSAPI/4.5/dojo/dojo.js"></script>  
+	<!-- echarts 配置 -->
+	<script type="text/javascript" src="js/main.js"></script>
+	<!-- 配置echarts与arcgis js API 中的dojo冲突 -->
+	<script type="text/javascript" >
+	var dojoConfig = {
+	        parseOnLoad: true,
+	        packages: [{
+	            "name": "js",
+	            "location": "/js"
+	        }]
+	    };
+	</script>
+	<!-- js-->
+<link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css" />  
+ <script src="https://js.arcgis.com/4.5/"></script>  
 
     <style>
       html,
@@ -55,13 +65,19 @@
 
 		<div id="map">
 			<div id="dlgTest" class="dialog"><span class="close">&times;</span>
-			    <div class="title">轨迹显示</div>
+			    <div id="title" class="title">轨迹显示</div>
 			    <div class="content"><br>
-			    &nbsp;&nbsp;<label >&nbsp;起始日期：&nbsp;</label>&nbsp;<input id="start" type="date" value="2014-01-13"/>
-			    <label >&nbsp;截止日期：&nbsp;</label>&nbsp;<input id="end" type="date" value="2014-01-13"/>
-			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="trackvisual" type="button" value="显示" >
+			    &nbsp;&nbsp;<label >&nbsp;选择日期：&nbsp;</label>&nbsp;<input id="start" type="date" value="2014-01-13"/>
+			    <label >&nbsp;空驶率：&nbsp;</label>&nbsp;<input id="kongshilv" type="text" value="无数据"/>
+			    &nbsp;&nbsp;&nbsp;<input id="trackvisual" type="button" value="显示" >&nbsp;&nbsp;
+			    <input id="DataTable" type="button" value="统计" >
+			   <div id ="container" style ="width:800px ;height:400px ">
+			   
+			   </div>
 			    </div>
 			</div>
+			
+			
 		</div>
 		</div>
 		<div class="sidebar-menu">
@@ -80,8 +96,8 @@
 										</li>
 										 <li id="menu-academico" ><a href="#"> <span>路线导航</span> <span class="fa fa-angle-right" style="float: right"></span></a>
 										   <ul id="menu-academico-sub" >
-											<li id="menu-academico-avaliacoes" ><a href="#"> Tabs &amp; Panels</a></li>
-											<li id="menu-academico-boletim" ><a href="#">Widgets</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="#">显示路线</a></li>
+											<li id="menu-academico-boletim" ><a href="#">路线分析</a></li>
 											
 										  </ul>
 										</li>
@@ -105,7 +121,7 @@
 									 </li>
 									 <li><a href="#"> <span>数据报表</span><span class="fa fa-angle-right" style="float: right"></span></a>
 									   <ul>
-										<li><a href="#"> Inbox</a></li>
+										<li onclick=""><a href="#"> 出租车数据</a></li>
 										<li><a href="#">Compose Mail</a></li>
 											<li><a href="#">Editors Page</a></li>
 									
@@ -142,8 +158,10 @@
   	<script src="js/mercator&lonlat.js"></script>
 <!-- Bootstrap Core JavaScript -->
   	<script src="js/bootstrap.min.js"></script>
+
 <!--图层-->
   	<script src="js/loadmap.js"> </script>
-  	 <script src="js/chuangkou.js"></script>
+  	<script src="js/chuangkou.js"></script>
+
 </body>
 </html>

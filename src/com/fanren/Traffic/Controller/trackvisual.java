@@ -11,7 +11,7 @@ import com.fanren.Traffic.pojo.taxiInfo;
 import com.fanren.Traffic.service.TaxiInfoService;
 
 /**
- * 轨迹显示功能
+ * TaxiInfo
  * @author fanren
  *
  */
@@ -27,7 +27,6 @@ public class trackvisual {
 	public List<taxiInfo> taxiInformation(@RequestParam("start_data") String start_data) {
 		List<taxiInfo> data=null;
 		data=taxiInfoservice.getTaxiInfoByData(start_data);
-		System.out.println("参数传递过来了");
 		return data;
 	}
 }

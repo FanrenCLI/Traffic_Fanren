@@ -106,9 +106,14 @@
             });
           });
         }
-           //**********************轨迹显示函数*************************//
+//**********************轨迹显示函数*********************************************************************************//
            var trackVisual=document.getElementById("trackvisual");
            trackVisual.onclick=trackvisual;
+           var Datatable=document.getElementById("DataTable");
+           Datatable.onclick=DataTable;
+           var kongshilv=document.getElementById("kongshilv");
+           
+           Data=null;
            function trackDraw(data){
                var point;
                var markerSymbol={
@@ -135,7 +140,7 @@
              }
            function trackvisual(){
            	var start_data=document.getElementById("start").value;
-           	var end_data=document.getElementById("end").value;
+           	Data=null;
            	$.ajax({
            		url:"info.do",
            		data:{"start_data":start_data},
@@ -145,10 +150,147 @@
            		success:function(data){
            			//arcgis显示图形函数
            			trackDraw(data);
+           			Data=data;
            		}
            	})
            };
-           
-           //***********************************************//
+           function DataTable(){
+        	   var dom = document.getElementById("container");
+        	   var myChart = echarts.init(dom);
+        	   var app = {};
+        	   option = null;
+        	   time=[] ;
+        	   Speed=[];
+        	   status_taxi=[];
+        	   var n=0;
+        	   for(var j=0;j<Data.length;j++){
+        	       Speed[j]=Data[j].speed;
+        	   }
+        	   for( var i=0;i<Data.length;i++){
+        	       time[i] = Data[i].time;
+        	   }
+        	   for(var i=0;i<Data.length;i++){
+        		   if(Data[i].status=="空车"){
+        			   status_taxi[i]= -20 ;
+        			   n++;
+        		   }
+        		   else{
+        			   status_taxi[i]= -10 ;
+        		   }
+        	   }
+        	   kongshilv.value=(n/Data.length*100).toFixed(0) + '%';
+        	   option = {
+        	       tooltip: {
+        	           trigger: 'axis'
+        	       },
+        	       title: {
+        	           left: 'center',
+        	           text: '出租车行驶数据',
+        	       },
+        	       toolbox: {
+        	           feature: {
+        	               dataZoom: {
+        	                   yAxisIndex: 'none'
+        	               },
+        	               restore: {},
+        	               saveAsImage: {}
+        	           }
+        	       },
+        	       xAxis: {
+        	           type: 'category',
+        	           boundaryGap: false,
+        	           data: time
+        	       },
+        	       yAxis: {
+        	           type: 'value',
+        	           boundaryGap: [0, '100%'],
+        	           axisLabel: {
+        	           	            formatter: '{value} Km/h'
+        	           	        }
+        	       },
+        	       dataZoom: [
+        	    	   {
+	        	           type: 'inside',
+	        	           xAxisIndex:[0],
+	        	           start: 0,
+	        	           end: 10
+        	    	   				},
+		   				{
+		   		            type: 'slider',
+		   		            show: true,
+		   		            xAxisIndex: [0],
+		   		            start: 0,
+		   		            end: 10
+		   		        },
+        	    	 {
+        	           start: 0,
+        	           end: 10,
+        	           handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+        	           handleSize: '80%',
+        	           handleStyle: {
+        	               color: '#fff',
+        	               shadowBlur: 3,
+        	               shadowColor: 'rgba(0, 0, 0, 0.2)',
+        	               shadowOffsetX: 2,
+        	               shadowOffsetY: 2
+        	           	}
+        	    	 }
+        	    	   				],
+        	       series: [
+        	           {
+        	               name:'车速',
+        	               type:'line',
+        	               smooth:true,
+        	               symbol: 'none',
+        	               sampling: 'average',
+        	               itemStyle: {
+        	                   normal: {
+        	                       color: 'rgb(255, 70, 131)'
+        	                   }
+        	               },
+        	               areaStyle: {
+        	                   normal: {
+        	                       color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        	                           offset: 0,
+        	                           color: 'rgb(255, 158, 68)'
+        	                       }, {
+        	                           offset: 1,
+        	                           color: 'rgb(255, 70, 131)'
+        	                       }])
+        	                   }
+        	               },
+        	               data: Speed
+        	           },
+        	           {
+        	        	   name:'载客状态',
+        	        	   type:'line',
+        	        	   smooth:false,
+        	        	   symbol:'none',
+        	        	   sampling:'average',
+        	        	   itemStyle:{
+        	        		   normal: {
+        	                       color: 'rgb(0, 0, 255)'
+        	                   }
+        	        	   },areaStyle: {
+        	                   normal: {
+        	                       color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        	                           offset: 0,
+        	                           color: 'rgb(0, 191, 255)'
+        	                       }, {
+        	                           offset: 1,
+        	                           color: 'rgb(65, 105, 255)'
+        	                       }])
+        	                   }
+        	               },
+        	               data:status_taxi
+        	           }
+        	       ]
+        	   };
+        	   ;
+        	   if (option && typeof option === "object") {
+        	       myChart.setOption(option, true);
+        	   }
+           }
+//**************************************************************************************************//
         
 });
